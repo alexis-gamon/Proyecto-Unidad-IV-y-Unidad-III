@@ -1,51 +1,75 @@
 
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 <h3 style="color: blueviolet;">
     <center>VEHICULOS DETALLE</center>
 
 </h3>
-
-<table class="table table-dark table-striped">
-    <tr> <td>Marca</td><td>Nombre</td> <td>Color</td><td>Año</td><td>Disponible</td> 
+{% if user.is_authenticated %}
+<!--
+  <table class="table table-dark table-striped">
+    <tr> <td>Marca</td><td>Nombre</td> <td>Color</td><td>Año</td><td>Disponible</td><td>Precio</td>  
 <tr>
     <td>{{Todos_Vehiculos.Marca}}</td>
     <td>{{Todos_Vehiculos.Nombre}}</td>
     <td>{{Todos_Vehiculos.Color}}</td>
     <td>{{Todos_Vehiculos.Año}}</td> 
     <td>{{Todos_Vehiculos.Disponible}}</td>
-  
+    <td>{{Todos_Vehiculos.Precio}}</td>
+-->
 
+    {% if user.is_superuser %}
    <a href="{% url 'vehiculos_editar' Todos_Vehiculos.pk %}"> Editar vehiculos</a>
 
    <a href="{% url 'vehiculos_eliminar' Todos_Vehiculos.pk %}"> Eliminar vehiculos</a>
+  
+   
+   
+   {% endif %}
 </tr>
 </table>
- <!-- 
-  <div class="card" style="width: 18rem;">
-    <img src="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo-shadow.png" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+{% endif %}
+ 
+  <div class="card" style="width: 24rem;">
+    <img src="{% static 'images/aag.jpg' %}" class="card-img-top" alt="...">
+     <div class="card-body">
+      <h5 class="card-title">Descripcion</h5>
+      <p class="card-text"><td>Marca: {{Todos_Vehiculos.Marca}}</td>
+        <br>
+        <td>Nombre: {{Todos_Vehiculos.Nombre}}</td>
+        <br>
+        <td>Color: {{Todos_Vehiculos.Color}}</td>
+        <br>
+        <td>Año: {{Todos_Vehiculos.Año}}</td> 
+        <br>
+        <td>Disponible: {{Todos_Vehiculos.Disponible}}</td>
+        <br>
+        <td>Precio: {{Todos_Vehiculos.Precio}}</td></p>
+        <br>
+      <!--<a href="#" class="btn btn-primary">Go somewhere</a>-->
     </div>
   </div>
-  -->
+  
 <ul class="list-group list-group-flush">
     {% for comentario in Todos_Vehiculos.comentarios.all %}
- 
     <li class="list-group-item"> {{comentario.autor}} escribio: {{comentario}}</li>
     
+    {% if user.is_superuser %}
+
+     <a href="{% url 'Comentario_eliminar' comentario.pk %}"> <button type="button" class="btn btn-info">Eliminar Comentario</button>    </a>
+  
+    <h1> {{ comentario.comentario }} {{comentario.pk}}</h1>
+    {% endif %}
+
     {% endfor %}
     
 </ul>
-
     <a href="{% url 'Comentario' Todos_Vehiculos.pk %}"> <button type="button" class="btn btn-info">Agregar Comentario</button>    </a>
  
-    <a href="{% url 'Comentario_eliminar' Todos_Vehiculos.pk %}"> <button type="button" class="btn btn-info">Eliminar Comentario</button>    </a>
- 
-  
 {% endblock content %}
+
+   
 
    
 

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!--<h1>Pagina de cobro</h1>
+<p>Pagar Suscripcion de $100</p>
+-->
+<h1>{{ vehiculo.Nombre}}</h1>
+<p>El pago es: {{vehiculo.Precio}}</p>
+<form action="{% url 'charge' %}" method="post">{% csrf_token %}
+<input type="hidden" value="{{vehiculo.Precio}}" id = Precio name="Precio" >
+
+<input type="hidden" value="{{vehiculo.Nombre}}" id = Nombre name="Nombre" >
+<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="{{ stripe_key }}"
+    data-description="Pagar el vehiculo: {{ vehiculo.Nombre}}"
+    data-amount="{{vehiculo.Precio}}00"
+    data-locale="auto">
+</script>
+</form>
+{% endblock content %}

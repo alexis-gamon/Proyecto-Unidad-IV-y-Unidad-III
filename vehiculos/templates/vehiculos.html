@@ -1,35 +1,58 @@
 
 {% extends 'base.html' %}
-
+{% load static %}
 
 {% block content %}
-<a href="{% url 'vehiculos_nuevo' %}">  Vehiculo Nuevo    </a >
+{% if user.is_superuser %}
+
+<!--<a href="{% url 'vehiculos_nuevo' %}">  Vehiculo Nuevo    </a >-->
+<a href="{% url 'vehiculos_nuevo' %}">  <button type="button" class="btn btn-info">Vehiculo Nuevo</button>    </a >
+        <br> 
 <br>
+{% endif %}
+
+{% if not perms.pages.suscriptor %}
+
+{% else %}
+
+{% endif %}
+
+<form class="form-inline mt-2 mt-md-0" action="{% url 'resul_busqueda' %}" method="get">
+Marca:   <input name="q" class="form-control mr-sm-2" type="text" placeholder="Buscar"
+  aria-label="Buscar"> </form>
+
 <h3 style="color: blueviolet;">
 
     <center> VEHICULOS </center>
     </h3>
+    
 {% if user.is_authenticated %}
 {% for vehiculos in Todos_Vehiculos %}
 
 <a href="{% url 'vehiculos_detalle' vehiculos.pk %}" >{{vehiculos}}  </a>
 <p>{{vehiculos.Serie}}</p>
+    
 
+{% if vehiculos.portada %}
+<img src="{{ vehiculos.portada.url }}" class="card-img-top" alt="...">
+{% else %}
 
-<div class="card" style="width: 18rem;">
-   
-    <img src="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo-shadow.png" class="card-img-top" alt="...">
-   
+<p>{{vehiculos.Nombre}}</p>
+{% endif %}
+
+  
     <div class="card-body">
       
       <h2 class="card-title">Nombre:{{ vehiculos.Nombre}}</h2>
       <h3><p class="card-text">{{ vehiculos.Descripcion}}</p> </31>
-      <p class="card-text"><small class="text-muted"> autor:{{ vehiculos.autor}}</small></p>
+      <p class="card-text"><small class="text-muted"> autor:{{ vehiculos}}</small></p>
+
+      <a href="{%url 'orders' vehiculos.pk %}">  <button type="button" class="btn btn-info">Pago Vehiculo Nuevo</button>    </a >
+
      </div>
     <ul class="list-group list-group-flush">
         
+
 {% endfor %}
-
 {% endif %}
-
 {% endblock content %}

@@ -1,0 +1,46 @@
+
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% if user.is_superuser %}
+
+    <a href="{% url 'ubicacion_nuevo' %}">  <button type="button" class="btn btn-info">Ubicacion Nuevo</button>    </a >
+<br>
+<br>
+{% endif %}
+
+
+Disponible: <form class="form-inline mt-2 mt-md-0" action="{% url 'resul_busqueda' %}" method="get">
+    <input name="q" class="form-control mr-sm-2" type="text" placeholder="Buscar"
+    aria-label="Buscar"> </form>
+  
+<h3 style="color: blueviolet;">
+
+    <center> UBICACION </center>
+    </h3>
+{% if user.is_authenticated %}
+{% for ubicacion in Todos_Ubicacion %}
+
+<a href="{% url 'ubicacion_detalle' ubicacion.pk %}" >{{ubicacion}}  </a>
+<p>{{ubicacion.Serie}}</p>
+
+
+<div class="card" style="width: 18rem;">
+    <img src="{% static 'images/aag.jpg' %}" class="card-img-top" alt="...">
+    
+    
+    <div class="card-body">
+      
+      <h2 class="card-title">Nombre:{{ ubicacion.Zona}}</h2>
+      <h3><p class="card-text">{{ ubicacion.CodigoPostal}}</p> </31>
+      <p class="card-text"><small class="text-muted"> autor:{{ ubicacion}}</small></p>
+     </div>
+    <ul class="list-group list-group-flush">
+        
+{% endfor %}
+
+{% endif %}
+
+{% endblock content %}

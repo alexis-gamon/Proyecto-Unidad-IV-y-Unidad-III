@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,22 +11,73 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proyecto Unidad 2</title>
+    <script src="{% static 'js/collapse.js' %}"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8\ abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/\ umd/popper.min.js" integrity="sha384UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1\ clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/\ bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6V\ rjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
-    
+
+  <center>
+    <div class="card" style="width: 28rem;">
+<img src="{% static 'images/aag.jpg' %}" class="card-img-top" alt="...">
+
+
+
+<p id="javas"></p>
+<p id="javas2"></p>
+<script>
+  document.write('La fecha de hoy es:' + retornarFecha());
+  document.write('<br>');
+  document.write('La hora es:' + retornarHora());
+ 
+</script>
+
+
+
+
+
+
+
+
+<div class="card-body">
+  <h5 class="card-title"><h1>Venta de Autos </h1></h5>
+  <p class="card-text">Los autos son esa tecnología emocionante y segura que nos conecta con todo y con todos. Llevamos el futuro a las calles para que dejes de imaginar y salgas a manejar. Descúbrelo.
+</div>
+</div>
+</center>
+<br>
+<br>
+<center>
+ <p>Grafica de las marcas de  vehiculos mas vendidos en el año en curso</p> 
+</center>
+
+<div id="myChart" style="width:100%; max-width:600px; height:500px;"></div>
+<script>
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+function drawChart() {
+var data = google.visualization.arrayToDataTable([
+  ['Marca', 'Marca'],
+  ['Volvo',5500],
+  ['Nissan',4900],
+  ['VW',4430],
+  ['Honda',2410],
+  ['Kia',1590]
+]);
+var options = {
+  title:'Marcas de vehiculos mas vendidas'
+};
+
+var chart = new google.visualization.BarChart(document.getElementById('myChart'));
+  chart.draw(data, options);
+}
+</script>
   
 
-    <center>
-        <div class="card" style="width: 28rem;">
-    
-    
-    <img src="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo-shadow.png" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title"><h1>Venta de Autos </h1></h5>
-      <p class="card-text">Los autos son esa tecnología emocionante y segura que nos conecta con todo y con todos. Llevamos el futuro a las calles para que dejes de imaginar y salgas a manejar. Descúbrelo.
-    </div>
-  </div>
-    </center>
   
   
     

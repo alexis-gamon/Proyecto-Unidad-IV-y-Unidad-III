@@ -44,6 +44,18 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'user.apps.UserConfig',
     'crispy_forms',
+    'orders.apps.OrdersConfig',
+
+    
+    'django.contrib.sites',
+    'allauth', # new
+    'allauth.account', # new
+    'allauth.socialaccount', # new
+    'allauth.socialaccount.providers.github', # new
+    
+
+    
+
     
     
 ]
@@ -82,13 +94,22 @@ WSGI_APPLICATION = 'proyectou2.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+#DATABASES = {
+#    'default': {
+#        'NAME': BASE_DIR / 'db.sqlite3',
+##        'ENGINE': 'django.db.backends.sqlite3',
+#    }
+#}
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('POSTGRES_NAME'),
+        'USER': os.environ.get('POSTGRES_USER'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+        'HOST': 'db',
+        'PORT': 5432,
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -124,9 +145,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 ###es es para agregar archivos estaticos imagenes
+
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]#local
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')# productivo
 STATICFILES_FINDERS = [
@@ -136,6 +158,17 @@ STATICFILES_FINDERS = [
 ]
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
+
+AUTHENTICATION_BACKENDS = (
+    "allauth.account.auth_backends.AuthenticationBackend",
+    "django.contrib.auth.backends.ModelBackend",
+)
+
+SITE_ID = 1
+
+
+
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -147,12 +180,33 @@ LOGOUT_REDIRECT_URL = 'home'
 
 CRISPY_TAMPLATE_PACK = 'bootstrap4'
 
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+ACCOUNT_LOGOUTL_REDIRECT = 'home'
 
+
+
+
+ACCOUNT_SESSION_REMEMBER = True
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+DEFAULT_FROM_EMAIL = 'gamonalexis8@gmail.com'
+
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+
+STRIPE_TEST_PUBLISHABLE_KEY=os.environ.get('STRIPE_TEST_PUBLISHABLE_KEY')
+STRIPE_TEST_SECRET_KEY=os.environ.get('STRIPE_TEST_SECRET_KEY')
+
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'  ###smtp-relay.gmail.com
-EMAIL_HOST_USER = 'gamonalexis22@gmail.com'#AQUI SE COLOCA EL URL QUE NOS MOSTRO AL CREAR LA API
-EMAIL_HOST_PASSWORD = 'fdbzlgdkmzexjysq'
-EMAIL_port = '587'
+EMAIL_HOST_USER = 'gamonalexis8@gmail.com'#AQUI SE COLOCA EL URL QUE NOS MOSTRO AL CREAR LA API
+EMAIL_HOST_PASSWORD = 'rtrqllcjeoyyhvty'
+EMAIL_port = '25'
 EMAIL_USE_TLS = True

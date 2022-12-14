@@ -1,0 +1,20 @@
+
+{% extends 'base.html' %}
+{% block content %}
+{% load crispy_forms_tags%}
+<h3 >
+    <h1 style="color: blueviolet;">
+
+    <center>CREAR ENTREGA </center>
+
+</h3>
+<form action=""method="post">{% csrf_token %}
+   <!-- {{ form.as_p}}-->
+   {{form|crispy}}
+
+   <br>
+    <input type="submit" value="Guardar" /> 
+</form>
+{{mensaje}}
+<table id="Regitrar Vehiculo Nuevo"></table>
+{% endblock content %}

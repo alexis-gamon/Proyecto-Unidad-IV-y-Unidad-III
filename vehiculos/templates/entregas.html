@@ -1,26 +1,64 @@
 
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-<H3 style="color: blueviolet;">
-    <center>ENTREGAS DE VEHICULOS </center>   
-   </H3>
+{% if user.is_superuser %}
+<a href="{% url 'entregas_nuevo' %}">  <button type="button" class="btn btn-info">  Entrega Nueva   </button>    </a >
+  <br>
+<br>
+{% endif %}
 
 
-<table class="table table-dark table-striped">
-    <tr> <td>Serie</td> <td>Cliente</td><td>Fecha</td> </tr> 
 
-    {% for entregas in Entrega %}
+{% if not perms.pages.suscriptor %}
+<!--<h1>
+  Pon un mensaje el que quieras
+</h1>
+-->
+{% else %}
 
-<tr>
-    <td>{{entregas.Serie}}</td>
-    <td>{{entregas.Cliente}}</td>
-    <td>{{entregas.Fecha}}</td>
+{% endif %}
 
-</tr>
+Modelo:<form class="form-inline mt-2 mt-md-0" action="{% url 'resul_busqueda' %}" method="get">
+  <input name="q" class="form-control mr-sm-2" type="text" placeholder="Buscar"
+  aria-label="Buscar"> </form>
+
+<h3 style="color: blueviolet;">
+
+    <center> ENTREGAS </center>
+    </h3>
+{% if user.is_authenticated %}
+{% for entregas in Todas_Entregas %}
+
+<a href="{% url 'entregas_detalle' entregas.pk %}" >{{entregas}}  </a>
+<p>{{entregas.Serie}}</p>
 
 
+<div class="card" style="width: 18rem;">
+    <img src="{% static 'images/aag.jpg' %}" class="card-img-top" alt="...">
+    
+    
+    <div class="card-body">
+      
+      <h3 class="card-title">Nombre:{{ entregas.Serie}}</h3>
+      <h3><p class="card-text">{{ entregas.Cliente}}</p> </31>
+      <p class="card-text"><small class="text-muted"> autor:{{ entregas}}</small></p>
+     </div>
+    <ul class="list-group list-group-flush">
+        
 {% endfor %}
-</table>
+
+{% endif %}
+
 {% endblock content %}
+
+
+
+
+
+
+
+
+
 

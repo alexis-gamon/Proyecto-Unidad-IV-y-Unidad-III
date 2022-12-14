@@ -1,0 +1,13 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<h3 style="color: blueviolet;">
+    <center>EDITAR UBICACION</center>
+
+</h3>
+<form action=""method="post">{% csrf_token %}
+     {{ form.as_p}}
+    
+     <input type="submit" name="Editar">
+
+{% endblock content %}

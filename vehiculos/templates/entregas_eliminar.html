@@ -1,0 +1,14 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<h3 style="color: rgb(117, 59, 172);">
+    <center>ELIMINAR VEHICULOS </center>
+
+</h3>
+<form action=""method="post">{% csrf_token %}
+   <!-- {{ form.as_p}}-->
+   <p>Seguro que desea eliminarlo</p>
+    <input type="submit" value="Eliminar" /> 
+</form>
+
+{% endblock content %}

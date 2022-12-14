@@ -1,0 +1,48 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h3 style="color: rgb(226, 43, 202);">
+    <center>UBICACION DETALLE</center>
+
+</h3>
+{% if user.is_authenticated %}
+<!--
+  <table class="table table-dark table-striped">
+    <tr> <td>Zona</td><td>CodigoPostal</td> <td>Lugar</td><td>Hora</td>
+<tr>
+    <td>{{Todos_Ubicacion.Zona}}</td>
+    <td>{{Todos_Ubicacion.CodigoPostal}}</td>
+    <td>{{Todos_Ubicacion.Lugar}}</td>
+    <td>{{Todos_Ubicacion.Hora}}</td> 
+-->
+
+  
+    {% if user.is_superuser %}
+   <a href="{% url 'ubicacion_editar' Todos_Ubicacion.pk %}"> Editar Ubicacion</a>
+
+   <a href="{% url 'ubicacion_eliminar' Todos_Ubicacion.pk %}"> Eliminar Ubicacion</a>
+   {% endif %}
+</tr>
+</table>
+{% endif %}
+
+  <div class="card" style="width: 24rem;">
+<img src="{% static 'images/aag.jpg' %}" class="card-img-top" alt="...">
+<div class="card-body">
+ <h5 class="card-title">Descripcion</h5>
+      <h5 class="card-title"> Ubicacion</h5>
+      <p class="card-text"><td>Zona: {{Todos_Ubicacion.Zona}}</td>
+        <br>
+        <td>CodigoPostal: {{Todos_Ubicacion.CodigoPostal}}</td>
+        <br>
+        <td>Lugar: {{Todos_Ubicacion.Lugar}}</td>
+        <br>
+        <td>Hora: {{Todos_Ubicacion.Hora}}</td> </p>
+        <br>
+      <!--<a href="#" class="btn btn-primary">Go somewhere</a>-->
+    </div>
+  </div>
+
+
+{% endblock content %}

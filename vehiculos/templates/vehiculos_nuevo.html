@@ -8,34 +8,15 @@
     <center>CREAR VEHICULOS </center>
 
 </h3>
-<form action=""method="post">{% csrf_token %}
+<!--<form action=""method="post">{% csrf_token %}-->
+<form enctype="multipart/form-data" class="row g-3" action="" method="post">{% csrf_token %}
    <!-- {{ form.as_p}}-->
    {{form|crispy}}
-<!--
-    
 
-   <label for="Marca">Marca</label>
-   <input type="text" name="Marca">
-
-   <br>
-   <label for="Nombre">Nombre</label>
-   <input type="text" name="Nombre">
-
-   <br>
-   <label for="Color">Color</label>
-   <input type="text" name="Color">
-
-   <br>
-   <label for="Año">Año</label>
-   <input type="text" name="Año">
-
-   <br>
-   <label for="Disponible">Disponible</label>
-   <input type="text" name="Disponible">
--->
    <br>
     <input type="submit" value="Guardar" /> 
 </form>
 {{mensaje}}
 <table id="Regitrar Vehiculo Nuevo"></table>
 {% endblock content %}
+

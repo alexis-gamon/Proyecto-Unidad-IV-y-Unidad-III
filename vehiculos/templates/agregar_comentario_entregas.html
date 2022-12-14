@@ -1,0 +1,18 @@
+
+
+
+{% extends 'base.html' %}
+{% block content %}
+<h3 >
+    <h1 style="color: blueviolet;">
+
+    <center>COMENTARIO NUEVO ENTREGAS </center>
+
+</h3>
+<form action=""method="post">{% csrf_token %}
+     {{ form.as_p}}
+
+   <br>
+    <input type="submit" value="Guardar" /> 
+</form>
+{% endblock content %}

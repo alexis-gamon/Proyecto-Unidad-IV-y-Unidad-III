@@ -1,0 +1,33 @@
+<h1> <h1 style="color: blueviolet;">
+
+  <center> Vehiculo </center>
+  </h1>
+  
+  {% extends 'base.html' %}
+  
+  {% block content %}
+  
+    <a href="{% url 'vehiculos_nuevo' %}">  <button type="button" class="btn btn-info">VehiculoNuevo</button>    </a >
+  <br>  
+   
+  {% if not perms.pages.suscriptor %}
+
+  
+  {% else %}
+
+  {% endif %}
+
+  {% for vehiculos in Todos_VehiculosBusquedas %}
+  
+  <a href="{% url 'vehiculos_detalle' vehiculos.pk %}" >{{vehiculos}}  </a>
+
+  
+  {% if vehiculos.portada %}
+<img src="{{ vehiculos.portada.url }}" class="card-img-top" alt="...">
+{% else %}
+  <p>{{vehiculos.Nombre}}</p>
+ {% endif %}
+  {% endfor %}
+  
+  
+  {% endblock content %}

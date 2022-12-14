@@ -1,0 +1,25 @@
+
+{% extends 'base.html' %}
+{% load socialaccount %}
+{% load crispy_forms_tags %}
+{% block content %}
+<center>
+   <h1> Login</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+        <input type="submit"></input>
+</form>
+<!--<p>¿Desea cambiar su contraseña ?<a class="nav-link" href="{%url 'password_change' %}">Cambiar Contraseña</a></p>
+-->
+<p>¿No tienes una cuenta Registrate?<a class="nav-link" href="{%url 'signup' %}">Registrarse</a></p>
+
+<p>¿Olvidaste tu contraseña?<a class="nav-link" href="{%url 'password_reset' %}">Recuperar Contraseña</a></p>
+
+<p>Iniciar sesion con GitHub <a href="{% provider_login_url 'github' %}">GitHub </a></p>
+
+           
+</center>
+
+{% endblock content %}

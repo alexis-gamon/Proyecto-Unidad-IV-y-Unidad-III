@@ -1,0 +1,74 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h3 style="color: blueviolet;">
+    <center>ALMACEN DETALLE</center>
+
+</h3>
+
+
+{% if user.is_superuser %}
+   <a href="{% url 'almacen_editar' Todos_almacen.pk %}"> Editar Almacen</a>
+
+   <a href="{% url 'almacen_eliminar' Todos_almacen.pk %}"> Eliminar Almacen</a>
+
+   
+</tr>
+</table>
+{% endif %}
+
+    {% for comentario in Todos_almacen.comentarios_almacen.all %}
+    {% if user.is_superuser %}
+    <a href="{% url 'Comentarioalmacen' Todos_almacen.pk %}"> <button type="button" class="btn btn-info">Agregar Comentario</button>    </a>
+ 
+
+     
+
+    {% endif %}
+
+    {% endfor %}
+
+<div class="card" style="width: 24rem;">
+    <img src="{% static 'images/aag.jpg' %}" class="card-img-top" alt="...">
+    <div class="card-body">
+     <h5 class="card-title">Descripcion</h5>
+        
+      <p class="card-text"> <td>NumeroSerie: {{Todos_almacen.NumeroSerie}}</td>
+        <br>
+        <td>Modelo: {{Todos_almacen.Modelo}}</td>
+        <br>
+        <td>Lote: {{Todos_almacen.Lote}}</td>
+        <br>
+        <td>NumAlmacen: {{Todos_almacen.NumAlmacen}}</td>
+        <br>
+        <td>Fecha: {{Todos_almacen.Fecha}}</td> </p>
+      <!--<a href="#" class="btn btn-primary">Go somewhere</a>-->
+    </div>
+  </div>
+
+  <ul class="list-group list-group-flush">
+    
+    <ul class="list-group list-group-flush">
+    {% for comentario in Todos_almacen.comentarios_almacen.all %}
+    <li class="list-group-item"> {{comentario.autor}} escribio: {{comentario}}</li>
+    
+    {% if user.is_superuser %}
+
+     <a href="{% url 'Comentario_eliminar_almacen' comentario.pk %}"> <button type="button" class="btn btn-info">Eliminar Comentario</button>    </a>
+  
+
+    {% endif %}
+
+    {% endfor %}
+    
+    
+</ul>
+
+
+
+
+    
+
+  
+{% endblock content %}
